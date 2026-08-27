@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-feature android:name="android.hardware.type.watch" />
+
+    <!-- Voice capture for speech-to-text -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!-- Network for Wearable Data Layer / message delivery to phone -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Haptic feedback (buzz on listen/reply) -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application
+        android:label="Hermes Watch"
+        android:theme="@android:style/Theme.DeviceDefault"
+        android:supportsRtl="true"
+        android:usesCleartextTraffic="true">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Receives the phone's reply via the Wearable Data Layer -->
+        <service
+            android:name=".DataLayerListenerService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.android.gms.wearable.BIND_LISTENER" />
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>
